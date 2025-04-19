@@ -1,3 +1,5 @@
+import sys
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
@@ -31,8 +33,9 @@ sc.addPyFile('/home/hadoop/python/src/db/geo_map.py')
 sc.addFile('/home/hadoop/python/src/rules/rules.py')
 
 # Importing modules that handle database operations, geographic data, and rules for determining fraud
-import geo_map
-import dao
+sys.path.append(os.path.join(os.path.dirname(__file__)))
+from db import geo_map
+from db import dao
 import rules
 
 # Reading streaming data from a Kafka topic
